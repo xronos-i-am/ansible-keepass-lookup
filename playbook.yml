@@ -13,22 +13,18 @@
     - name: keepass_db_file
       prompt: "Enter path to keepass DB"
 
-  vars:
-    ssh_keys: "{{ lookup('keepass', {'tag':'ssh-key'}, search='custom', wantlist=True) }}"
-
   tasks:
-    # - name: Find by path
-    #   debug: 
-    #     var: lookup('keepass', 'dir1/dir2/id_rsa')['path']
-    # - name: Find by title
-    #   debug: 
-    #     var: lookup('keepass', 'id_rsa', search='title')['title']
-    # - name: Find by uuid
-    #   debug: 
-    #     var: lookup('keepass', 'de37072b8cec670ff58212b9cae05806', search='uuid')['uuid']
+    - name: Find by path
+      debug: 
+        var: lookup('keepass', 'dir1/dir2/id_rsa')['path']
+    - name: Find by title
+      debug: 
+        var: lookup('keepass', 'id_rsa', search='title')['title']
+    - name: Find by uuid
+      debug: 
+        var: lookup('keepass', 'de37072b8cec670ff58212b9cae05806', search='uuid')['uuid']
     - name: Find multiple by custom fields
       debug: 
-        # msg: "{{ item | from_json }}"
-        var: item
-      with_items: "{{ ssh_keys }}"
+        msg: "{{ item.fields.tag }}"
+      with_items: "{{ lookup('keepass', {'tag':'ssh-key'}, search='custom', wantlist=True) }}"
 

@@ -42,7 +42,7 @@ EXAMPLES = """
 - name: Retrieve entry by uuid
   debug:
     var: lookup('keepass', 'de37072b8cec670ff58212b9cae05806', search='uuid')
-- name: Retrieve entries by tags (list)
+- name: Retrieve entries by tags (list) - not tested!
   debug:
     var: lookup('keepass', {{ ['commerce', 'www'] }}, search='tags')
 - name: Retrieve entries by custom fields (dict)
@@ -73,7 +73,7 @@ class KeePass(object):
           'tags':     entry.tags, 
           'fields':   entry.custom_properties,
           'path':     entry.path, 
-          'uuid':     entry.uuid, 
+          'uuid':     entry.uuid.hex, 
           # 'notes':    entry.notes, 
           # 'icon':     entry.icon, 
         }
@@ -113,7 +113,7 @@ class LookupModule(LookupBase):
         
         db.password  = variables.get('keepass_password')
         db.kdbx      = variables.get('keepass_db_file')
-        db.keyfile   = variables.get('keepass_key_file')
+        db.keyfile   = variables.get('keepass_key_file') # not tested
 
         search_field = kwargs.get('search', 'path')
         search_value = terms[0]
