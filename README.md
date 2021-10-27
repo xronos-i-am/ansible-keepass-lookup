@@ -35,6 +35,9 @@ Use lookups:
     - name: Retrieve entries by title
       debug:
         var: lookup('keepass', 'id_rsa', search='title')
+    - name: Retrieve entry by username
+      debug:
+        var: lookup('keepass', 'testuser@test.home', search='username')
     - name: Retrieve entry by uuid
       debug:
         var: lookup('keepass', 'de37072b8cec670ff58212b9cae05806', search='uuid')
