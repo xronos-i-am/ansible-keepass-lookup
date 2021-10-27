@@ -91,6 +91,8 @@ class KeePass(object):
         elif field == 'path':
             params['path'] = value
             first = True
+        elif field == 'username':
+            params['username'] = value
         elif field == 'uuid':
             params['uuid'] = uuid.UUID(value)
             first = True

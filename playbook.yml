@@ -20,6 +20,9 @@
     - name: Find by title
       debug: 
         var: lookup('keepass', 'id_rsa', search='title')['title']
+    - name: Find by username
+      debug: 
+        var: lookup('keepass', 'test@test.home', search='username')['username']
     - name: Find by uuid
       debug: 
         var: lookup('keepass', 'de37072b8cec670ff58212b9cae05806', search='uuid')['uuid']
